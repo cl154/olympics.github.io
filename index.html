@@ -1,49 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name='author' content='Your Name'>
-    <title>The Narrative of Modern Olympic Games</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Clement" />
+    <title>Narrative Visualization of Olympic Medals Distribution</title>
     <!-- Load favicon -->
-    <link rel="icon" href="https://yourwebsite.com/favicon.ico">
+    <link rel="icon" href="https://yourwebsite.com/favicon.ico" />
     <!-- Load css files -->
-    <link rel='stylesheet' type='text/css' href='css/style.css'>
-    <!-- Load d3.js libraries -->
-    <script src='https://d3js.org/d3.v4.min.js'></script>
-    <!-- Load custom scripts -->
-    <script type="text/javascript" src='js/chart_scatter.js' charset='utf-8'></script>
-    <script type="text/javascript" src='js/chart_bar.js' charset='utf-8'></script>
-    <script type="text/javascript" src='js/index.js' charset='utf-8'></script>
-</head>
-
-<body>
-    <div id='header'>
-        <h1 style="text-align:center">Is the message of modern Olympics still valid?</h1>
-    </div>
-    <div id='introDivId'>
-        <p style="text-align:center;"><img src="img/olympics.png" alt="The five-ringed symbol of the Olympic Games" style="height:140px;"></p>
-        <p> Pierre de Coubertin, founder of the modern Olympic Games and the International Olympic Committee, believed that the early ancient Olympics encouraged competition among amateur rather than professional athletes, and saw value in that. Does the
-            country's population and/or economic prosperity play a role in succeeding in Olympics? Does the role of hosting country matter at all?</p>
-    </div>
-    <br>
-    <div id='buttonsDivId'>
-        <button id="bp" type="button" class="btn btn-default" style="visibility : hidden" onclick="previousScene()">&laquo; Previous Olympics</button>
-        <button id="bs" type="button" class="btn-summer btn-default" onclick="summerOlympics()">Explore Summer Olympics</button>
-        <button id="bh" type="button" class="btn-home btn-default" style="visibility : hidden" onclick="homeScene()"></button>
-        <button id="bw" type="button" class="btn-winter btn-default" onclick="winterOlympics()">Explore Winter Olympics</button>
-        <button id="bn" type="button" class="btn btn-default" style="visibility : hidden" onclick="nextScene(0)">Next Olympics &raquo;</button>
-    </div>
-    <div id='yearsDivId'></div>
-    <div id="venueDivId"></div>
-    <div id='scatterDivId'></div>
-    <div id='barDivId'></div>
-    <div id='sourceDivId'></div>
-    <br>
-    <div id="footer">
-        <p>&copy; 2024 by Your Name. All rights reserved.</p>
-    </div>
-</body>
-
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!-- Load d3.js library -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Narrative Visualization of Olympic Medals Distribution</h1>
+    </header>
+    <main>
+      <section id="intro">
+        <div class="intro-content">
+          <img src="image/pic1.png" alt="Olympic Image" class="intro-img" />
+          <div class="text-box">
+            <p>
+              The modern Olympic Games bring together athletes from around the world to compete for gold, silver, and bronze medals.
+              This narrative visualization tool helps you explore how Olympic medals have been distributed across different countries over the years.
+              By examining the geographical distribution of medals, you can gain insights into the factors that influence Olympic success, such as population size, economic prosperity, and the role of the host country.
+              Use the buttons below to view the distribution of gold, silver, and bronze medals. Each map animation shows the number of medals won by each country in a given year, represented by circles of varying sizes and colors. Hover over the circles for more details.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="buttons">
+        <button id="btn-gold" type="button" class="btn-gold" onclick="location.href='gold_medal_animation.html'">Explore Gold Medals</button>
+        <button id="btn-silver" type="button" class="btn-silver" onclick="location.href='silver_medal_animation.html'">Explore Silver Medals</button>
+        <button id="btn-bronze" type="button" class="btn-bronze" onclick="location.href='bronze_medal_animation.html'">Explore Bronze Medals</button>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 by Clement Lin. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
