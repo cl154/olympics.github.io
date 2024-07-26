@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     .translate([width / 2, height / 2])
   const path = d3.geoPath().projection(projection)
 
+  const tooltip = d3.select('#tooltip')
+
   d3.json('data/countries.geojson').then(function (geoData) {
-    // Print GeoJSON country ids
     const geoCountryIds = geoData.features.map((f) => f.id)
 
     svg
@@ -31,25 +32,22 @@ document.addEventListener('DOMContentLoaded', function () {
       .attr('fill', '#ccc')
       .attr('stroke', '#333')
 
-    // Add a text element to display the current year
     const yearText = svg
       .append('text')
       .attr('x', width / 2)
-      .attr('y', -20) // Adjusted position
+      .attr('y', -20)
       .attr('text-anchor', 'middle')
       .attr('font-size', '24px')
       .attr('font-weight', 'bold')
 
-    // Add a text element to display the medal details
     const detailsText = svg
       .append('text')
       .attr('x', width / 2)
-      .attr('y', 10) // Adjusted position
+      .attr('y', 10)
       .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
 
     d3.csv('data/medals.csv').then(function (data) {
-      // Print CSV country codes
       const csvCountryCodes = [
         ...new Set(data.map((d) => d.country_3_letter_code)),
       ]
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
         (d) => d.medal_type,
         (d) => d.slug_game
       )
-
 
       const maxMedals = 60
 
@@ -110,10 +107,8 @@ document.addEventListener('DOMContentLoaded', function () {
           })
         })
 
-        // Update year text
         yearText.text(`Year: ${year}`)
 
-        // Update details text
         const details = yearData
           .map((d) => `${d.countryCode}: ${d.medals} medals`)
           .join(', ')
@@ -142,6 +137,20 @@ document.addEventListener('DOMContentLoaded', function () {
           })
           .attr('r', (d) => Math.sqrt(d.medals) * 7)
           .attr('fill', (d) => color(d.medals))
+          .on('mouseover', (event, d) => {
+            const country = geoData.features.find((f) => f.id === d.countryCode)
+            if (country) {
+              const coords = projection(d3.geoCentroid(country))
+              tooltip
+                .style('left', `${coords[0] + margin.left}px`)
+                .style('top', `${coords[1] + margin.top}px`)
+                .style('visibility', 'visible')
+                .html(`${d.countryCode}: ${d.medals} silver medals`)
+            }
+          })
+          .on('mouseout', () => {
+            tooltip.style('visibility', 'hidden')
+          })
 
         circles
           .enter()
@@ -164,6 +173,20 @@ document.addEventListener('DOMContentLoaded', function () {
           })
           .attr('r', (d) => Math.sqrt(d.medals) * 7)
           .attr('fill', (d) => color(d.medals))
+          .on('mouseover', (event, d) => {
+            const country = geoData.features.find((f) => f.id === d.countryCode)
+            if (country) {
+              const coords = projection(d3.geoCentroid(country))
+              tooltip
+                .style('left', `${coords[0] + margin.left}px`)
+                .style('top', `${coords[1] + margin.top}px`)
+                .style('visibility', 'visible')
+                .html(`${d.countryCode}: ${d.medals} silver medals`)
+            }
+          })
+          .on('mouseout', () => {
+            tooltip.style('visibility', 'hidden')
+          })
 
         circles.exit().remove()
       }
